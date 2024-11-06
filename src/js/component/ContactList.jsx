@@ -10,7 +10,7 @@ const ContactList = () => {
     return(
         <>
             <ul>
-                {store.data.contacts.map(contact => {
+                {store.contacts && store.contacts.map(contact => {
                     return(
                         <li key={contact.id} className="d-flex">
                             <Contact 

@@ -48,11 +48,20 @@ const getState = ( { getStore, getActions, setStore } ) => {
 				})
 				.then(data => {
 					// gives the array of objects
-					console.log(data.contacts)
-					setStore( {contacts: contacts} )
+					// console.log(data.contacts)
+					setStore( {contacts: data.contacts || data} )
 				})
 				.catch(error => console.log("Error: ", error))
-			}
+			},
+
+            deleteContact: (contact) => {
+                // use fetch to delete a contact
+                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts/${contact.id}`, {
+                    method: "DELETE"
+                })
+            }            
+
+            
         }
     };
 };
