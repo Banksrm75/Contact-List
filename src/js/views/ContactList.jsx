@@ -6,7 +6,7 @@ import { Context } from "../store/appContext.js"
 const ContactList = () => {
 
     const {store, actions} = useContext(Context);
-
+    
     return(
         <>
             <ul>
@@ -18,6 +18,7 @@ const ContactList = () => {
                                 phone={contact.phone}
                                 email={contact.email}
                                 address={contact.address}
+                                id={contact.id}
                             />
                         </li>
                     );

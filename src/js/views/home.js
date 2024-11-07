@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/home.css";
-import ContactList from "../component/ContactList.jsx";
+import ContactList from "./ContactList.jsx";
 
 
 const fakeData = [

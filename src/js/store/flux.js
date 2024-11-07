@@ -1,3 +1,5 @@
+import AddContact from "../views/AddContact";
+
 const getState = ( { getStore, getActions, setStore } ) => {
     return {
         store: {
@@ -17,27 +19,16 @@ const getState = ( { getStore, getActions, setStore } ) => {
             
         },
         actions: {
-            // Use getActions to call a function within a fuction
-            exampleFunction: () => {
-                getActions().changeColor(0, "green");
-            },
-            loadSomeData: () => {
-                /**
-                    fetch().then().then(data => setStore({ "foo": data.bar }))
-                */
-            },
-            // changeColor: (index, color) => {
-            //     //get the store
-            //     const store = getStore();
-            //     //we have to loop the entire demo array to look for the respective index
-            //     //and change its color
-            //     const demo = store.demo.map((elm, i) => {
-            //         if (i === index) elm.background = color;
-            //         return elm;
-            //     });
-            //     //reset the global store
-            //     setStore({ demo: demo });
-            // }
+            // // Use getActions to call a function within a fuction
+            // exampleFunction: () => {
+            //     getActions().changeColor(0, "green");
+            // },
+            // loadSomeData: () => {
+            //     /**
+            //         fetch().then().then(data => setStore({ "foo": data.bar }))
+            //     */
+            // },
+            
 			getContacts: () => {
 				fetch('https://playground.4geeks.com/contact/agendas/Banksrm/contacts')
 				.then (response => {
@@ -46,22 +37,59 @@ const getState = ( { getStore, getActions, setStore } ) => {
 					}
 					return response.json();
 				})
-				.then(data => {
-					// gives the array of objects
-					// console.log(data.contacts)
-					setStore( {contacts: data.contacts || data} )
+				.then(data => {					
+					setStore( {contacts: data.contacts} )
 				})
 				.catch(error => console.log("Error: ", error))
 			},
 
-            deleteContact: (contact) => {
+            deleteContact: (contactID) => {
                 // use fetch to delete a contact
-                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts/${contact.id}`, {
+                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts/${contactID}`, {
                     method: "DELETE"
                 })
-            }            
+                .then(response => {
+                    if (response.status !== 204) {
+                        console.log("Error! Aborting Delete");
+                        throw Error(response.statusText);
+                    }
+                    console.log("Deletion of contact successful");
+                    getActions().getContacts();
+                    })
+                .catch(error => console.log(error));
 
-            
+                
+            },
+
+            CreateContact: (name, email, phone, address) => {
+                
+                let contact = {
+                    
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    address: address
+                    
+                }
+
+                let options = {
+                        method: 'POST',
+                        body: JSON.stringify(contact), 
+                        headers: {
+                          'Content-Type': 'application/json'
+                        }
+                      }
+                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts`, options)
+                .then(response => {
+                    if(!response.ok) {
+                        throw Error("Error! Unable to post new contact.");
+                    }
+                    console.log("Contact successfully added");
+                    getActions().getContacts();
+                    return response.json();                    
+                })
+                .catch(error => console.log("More info on error: ", error));                
+            }
         }
     };
 };
