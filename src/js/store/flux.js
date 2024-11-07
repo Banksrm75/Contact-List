@@ -1,4 +1,3 @@
-import AddContact from "../views/AddContact";
 
 const getState = ( { getStore, getActions, setStore } ) => {
     return {
