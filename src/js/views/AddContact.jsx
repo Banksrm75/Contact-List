@@ -34,7 +34,7 @@ const AddContact = () => {
                                 name='name' 
                                 required
                                 minLength="6" 
-                                maxlength="20" 
+                                maxLength="20" 
                                 size="100" 
                                 onChange={e => setName(e.target.value)}
                                 value={name}
@@ -50,7 +50,7 @@ const AddContact = () => {
                                 name='email' 
                                 required
                                 minLength="6" 
-                                maxlength="50" 
+                                maxLength="50" 
                                 size="100"
                                 onChange={e => setEmail(e.target.value)}
                                 value={email} 
@@ -66,7 +66,7 @@ const AddContact = () => {
                                 name='phone' 
                                 required
                                 minLength="12" 
-                                maxlength="15" 
+                                maxLength="15" 
                                 size="100" 
                                 onChange={e => setPhone(e.target.value)}
                                 value={phone}
@@ -82,7 +82,7 @@ const AddContact = () => {
                                 name='address' 
                                 required
                                 minLength="4" 
-                                maxlength="50" 
+                                maxLength="50" 
                                 size="100" 
                                 onChange={e => setAddress(e.target.value)}
                                 value={address}

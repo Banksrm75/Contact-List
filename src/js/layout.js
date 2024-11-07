@@ -5,8 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
-// import AddContact from "./views/AddContact.jsx";
-import AddContact from "./views/AddContact";
+import AddContact from "./views/AddContact.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
