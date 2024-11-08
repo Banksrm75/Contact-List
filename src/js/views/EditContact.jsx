@@ -4,24 +4,22 @@ import React, { useState, useContext } from 'react';
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
 
-const AddContact = () => {
+const EditContact = () => {
 
     const {store, actions} = useContext(Context);
+        
+    // Sets useState to render the current information to be edited
+    const [name, setName] = useState( store.saveCurrentContact.name );
+    const [email, setEmail] = useState( store.saveCurrentContact.email );
+    const [phone, setPhone] = useState( store.saveCurrentContact.phone );
+    const [address, setAddress] = useState( store.saveCurrentContact.address );
     
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
-
-
-
-
     return (<>
         <div className="row">
             <div className="col-2"></div>
             <div className="col-8">
                 <div className="heading">
-                    <h1>Add a new contact</h1>
+                    <h1>Edit a contact</h1>
                 </div>
                 
                 <section>
@@ -92,9 +90,13 @@ const AddContact = () => {
                     
                 </section>
                 <Link to="/">
-                    <button onClick={ () => {actions.CreateContact( name, email, phone, address)} }>save</button>
-                </Link>    
-                    
+                    <button onClick={ () => {
+                        actions.editContact( name, email, phone, address, store.saveCurrentContact.id)}}>
+                        save
+                    </button>
+                </Link>
+                
+                
                 <div>
                     <Link to="/">
                         <span>or get back to contacts</span>
@@ -109,4 +111,4 @@ const AddContact = () => {
     </>);
 }
 
-export default AddContact
+export default EditContact
