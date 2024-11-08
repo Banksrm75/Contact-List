@@ -6,10 +6,12 @@ import { Context } from "../store/appContext.js"
 const ContactList = () => {
 
     const {store, actions} = useContext(Context);
-    useEffect( () => {
-        actions.getContacts();
-        
-    }, [actions]);
+
+    // useEffect( () => {
+    //     actions.getContacts();
+
+    // }, [actions]);
+    
     return(
         <>
             <ul>

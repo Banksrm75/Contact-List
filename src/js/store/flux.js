@@ -93,24 +93,22 @@ const getState = ( { getStore, getActions, setStore } ) => {
                 .catch(error => console.log("More info on error: ", error));                
             },
 
-            editContact: ( {name, phone, email, address, id} ) => {
-                
-                getActions().getContacts();
-
+            editContact: ( contact, id ) => {
+                    
                 let options = {
-                        method: 'POST',
+                        method: 'PUT',
                         body: JSON.stringify(contact), 
                         headers: {
                           'Content-Type': 'application/json'
                         }
                       }
-                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts`, options)
+                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts/${id}`, options)
                 .then(response => {
                     if(!response.ok) {
-                        throw Error("Error! Unable to post new contact.");
+                        throw Error("Error! Unable to edit new contact.");
                     }
-                    console.log("Contact successfully added");
-                    getActions().getContacts();
+                    console.log("Contact successfully edited");
+                    // setStore( {contacts: data.contact} )
                     return response.json();                    
                 })
                 .catch(error => console.log("More info on error: ", error));                
