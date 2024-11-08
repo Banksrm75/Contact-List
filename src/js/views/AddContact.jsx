@@ -91,7 +91,10 @@ const AddContact = () => {
                     </div>
                     
                 </section>
-                <button onClick={ () => {actions.CreateContact( name, email, phone, address)} }>save</button>
+                <Link to="/">
+                    <button onClick={ () => {actions.CreateContact( name, email, phone, address)} }>save</button>
+                </Link>    
+                    
                 <div>
                     <Link to="/">
                         <span>or get back to contacts</span>

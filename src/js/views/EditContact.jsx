@@ -7,15 +7,13 @@ import { Link } from "react-router-dom";
 const EditContact = () => {
 
     const {store, actions} = useContext(Context);
+        
+    // Sets useState to render the current information to be edited
+    const [name, setName] = useState( store.saveCurrentContact.name );
+    const [email, setEmail] = useState( store.saveCurrentContact.email );
+    const [phone, setPhone] = useState( store.saveCurrentContact.phone );
+    const [address, setAddress] = useState( store.saveCurrentContact.address );
     
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
-
-
-
-
     return (<>
         <div className="row">
             <div className="col-2"></div>
@@ -91,7 +89,14 @@ const EditContact = () => {
                     </div>
                     
                 </section>
-                <button onClick={ () => {actions.editContact( name, email, phone, address)} }>save</button>
+                <Link to="/">
+                    <button onClick={ () => {
+                        actions.editContact( name, email, phone, address, store.saveCurrentContact.id)}}>
+                        save
+                    </button>
+                </Link>
+                
+                
                 <div>
                     <Link to="/">
                         <span>or get back to contacts</span>
