@@ -53,7 +53,10 @@ const getState = ( { getStore, getActions, setStore } ) => {
                         throw Error(response.statusText);
                     }
                     console.log("Deletion of contact successful");
-                    getActions().getContacts();
+                    let updatedContacts = getStore().contacts.filter( (contact) => {
+                        return(contactID !== contact.id);
+                    });
+                    setStore({contacts: updatedContacts});
                     })
                 .catch(error => console.log(error));
 
@@ -70,6 +73,29 @@ const getState = ( { getStore, getActions, setStore } ) => {
                     address: address
                     
                 }
+
+                let options = {
+                        method: 'POST',
+                        body: JSON.stringify(contact), 
+                        headers: {
+                          'Content-Type': 'application/json'
+                        }
+                      }
+                fetch(`https://playground.4geeks.com/contact/agendas/Banksrm/contacts`, options)
+                .then(response => {
+                    if(!response.ok) {
+                        throw Error("Error! Unable to post new contact.");
+                    }
+                    console.log("Contact successfully added");
+                    getActions().getContacts();
+                    return response.json();                    
+                })
+                .catch(error => console.log("More info on error: ", error));                
+            },
+
+            editContact: ( {name, phone, email, address, id} ) => {
+                
+                getActions().getContacts();
 
                 let options = {
                         method: 'POST',

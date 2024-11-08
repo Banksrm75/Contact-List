@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Contact from "./Contact.jsx";
 
 import { Context } from "../store/appContext.js"
@@ -6,7 +6,10 @@ import { Context } from "../store/appContext.js"
 const ContactList = () => {
 
     const {store, actions} = useContext(Context);
-    
+    useEffect( () => {
+        actions.getContacts();
+        
+    }, [actions]);
     return(
         <>
             <ul>
