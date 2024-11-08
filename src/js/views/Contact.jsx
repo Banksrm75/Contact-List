@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
+import "../../styles/Contact.css";
 
                     // Destructure your passed object
 const Contact = ( {name, phone, email, address, id} ) => {
@@ -11,7 +12,7 @@ const Contact = ( {name, phone, email, address, id} ) => {
     return(
         <>
             <img src="https://xsgames.co/randomusers/avatar.php?g=female" />
-            <div>
+            <div className="contact-information">
                 <p className="fw-bold fs-2">{name}</p>
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
